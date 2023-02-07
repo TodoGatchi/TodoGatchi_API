@@ -1,7 +1,8 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from 'dotenv';
+import express, { Express, Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import { router } from './routes';
+// import dotenv from 'dotenv';
 
 const port = 8000;
 const app: Express = express();
@@ -15,9 +16,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.get("/", (req: Request, res: Response) => {
-  res.send('hello from express')
-});
+app.use('/api', router);
 
 app.listen(port, () => {
   console.log(`listening on ${port}`)
